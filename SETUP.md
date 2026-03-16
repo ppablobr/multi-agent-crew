@@ -72,6 +72,60 @@ To create a GitHub PAT:
 1. Go to GitHub > Settings > Developer settings > Personal access tokens
 2. Create a token with repo access
 
+#### Google Sheets MCP Server
+
+Enables agents to read and write Google Sheets directly (used by LinkedIn Agent for post tracking, Data Analytics Agent for dashboards, etc.).
+
+**Step 1 — Create a Google Cloud project**
+
+1. Go to [console.cloud.google.com](https://console.cloud.google.com)
+2. Create a new project (or select an existing one)
+
+**Step 2 — Enable the Google Sheets API**
+
+1. Go to **APIs & Services > Library**
+2. Search for "Google Sheets API" and click **Enable**
+
+**Step 3 — Configure the OAuth consent screen**
+
+1. Go to **APIs & Services > OAuth consent screen**
+2. User type: **External** (or Internal for Google Workspace accounts)
+3. Fill in app name and support email
+4. Add scope: `https://www.googleapis.com/auth/spreadsheets`
+5. Add your Google account as a test user
+
+**Step 4 — Create OAuth2 credentials**
+
+1. Go to **APIs & Services > Credentials**
+2. Click **Create Credentials > OAuth Client ID**
+3. Application type: **Desktop App**
+4. Download the JSON file
+5. Save it inside the `credentials/` directory:
+   ```
+   credentials/client_secret_YOUR_CLIENT_ID.apps.googleusercontent.com.json
+   ```
+
+**Step 5 — Generate the authentication token**
+
+Start Claude Code and trigger any Google Sheets action (e.g., "list my spreadsheets"). The MCP server will open a browser window for OAuth authorization. After authorizing, the token is saved automatically to `credentials/token.json`.
+
+**Step 6 — Update `.mcp.json`**
+
+```json
+{
+  "google-sheets": {
+    "command": "npx",
+    "args": ["-y", "mcp-google-sheets"],
+    "env": {
+      "CREDENTIALS_PATH": "./credentials/client_secret_YOUR_CLIENT_ID.apps.googleusercontent.com.json",
+      "TOKEN_PATH": "./credentials/token.json"
+    }
+  }
+}
+```
+
+> Both `credentials/` and `.mcp.json` are in `.gitignore` — your credentials will never be committed.
+
 ### 3. Start Claude Code
 
 ```bash

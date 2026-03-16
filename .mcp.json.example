@@ -16,6 +16,14 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "your-github-pat"
       }
+    },
+    "google-sheets": {
+      "command": "npx",
+      "args": ["-y", "mcp-google-sheets"],
+      "env": {
+        "CREDENTIALS_PATH": "./credentials/client_secret_YOUR_CLIENT_ID.apps.googleusercontent.com.json",
+        "TOKEN_PATH": "./credentials/token.json"
+      }
     }
   }
 }

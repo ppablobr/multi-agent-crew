@@ -1,7 +1,7 @@
 # 🌍 World State — Multi-Agent Crew
 
 > Este arquivo é a **memória global** do sistema. Todos os agentes leem e atualizam este arquivo.
-> Última atualização: YYYY-MM-DD
+> Última atualização: 2026-03-16
 
 ---
 
@@ -26,6 +26,8 @@
 | Education Agent | 🟢 Ativo | — |
 | Data Analytics Agent | 🟢 Ativo | — |
 | DevOps Agent | 🟢 Ativo | — |
+| GitHub Ops Agent | 🟢 Ativo | 2026-03-16 — Criado |
+| GitHub Agent | 🟢 Ativo | 2026-03-16 — Integrado |
 
 ---
 
@@ -39,7 +41,8 @@
 
 | Data | Agente | Ação |
 |---|---|---|
-| — | — | — |
+| 2026-03-16 | Agent Manager | GitHub Ops Agent integrado ao ecossistema (AGENT.md, memory, ecosystem-map, world.md, CLAUDE.md) |
+| 2026-03-16 | Agent Manager | GitHub Agent (skill) integrado ao ecossistema — trabalha em par com GitHub Ops (gh CLI vs git local) |
 
 ---
 

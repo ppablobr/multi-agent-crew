@@ -71,27 +71,29 @@ Ao concluir o post, sempre ofereça:
 
 ### 4. Salvar post na Google Sheets
 
-Após o post ser aprovado pelo usuário, salve na planilha de controle via webhook do n8n:
+Após o post ser aprovado pelo usuário, salve diretamente na planilha via MCP do Google Sheets:
 
-1. Leia a **Webhook URL** em `agents/linkedin/memory/google-sheets-config.md`
-2. Use o Bash tool para enviar um POST request com os dados do post:
+1. Leia `agents/linkedin/memory/google-sheets-config.md` para obter o `spreadsheet_id` e o nome da aba
+2. Use `mcp__google-sheets__get_sheet_data` para descobrir a próxima linha vazia (conte as linhas existentes + 1, considerando que a linha 1 é o cabeçalho)
+3. Use `mcp__google-sheets__update_cells` para escrever os dados na próxima linha disponível:
 
-```bash
-curl -X POST https://your-n8n-instance.example.com/webhook/linkedin-post \
-  -H "Content-Type: application/json" \
-  -d '{
-    "data": "YYYY-MM-DD",
-    "formato": "Narrativa|Lista|Carrossel",
-    "tema": "Título curto do post",
-    "hook": "Primeira linha do post",
-    "texto": "Corpo completo do post",
-    "hashtags": "#tag1 #tag2 #tag3",
-    "publico": "Técnico|Executivo|Misto",
-    "status": "Rascunho|Aprovado|Publicado"
-  }'
+```
+spreadsheet_id: (lido do google-sheets-config.md)
+sheet: "linkedin-posts-template"
+range: "A{N}:H{N}"  ← onde N é a próxima linha vazia
+data: [[
+  "YYYY-MM-DD",           # A — Data
+  "Narrativa|Lista|Carrossel",  # B — Formato
+  "Título curto do post", # C — Tema
+  "Primeira linha do post", # D — Hook
+  "Corpo completo do post", # E — Texto
+  "#tag1 #tag2 #tag3",    # F — Hashtags
+  "Técnico|Executivo|Misto", # G — Público
+  "Rascunho|Aprovado|Publicado" # H — Status
+]]
 ```
 
-> Se o webhook retornar erro, verifique se o workflow está ativo em https://your-n8n-instance.example.com/workflow/your-workflow-id
+> As colunas I (Impressões), J (Likes), K (Comentários) e L (Engajamento %) ficam em branco — serão preenchidas após publicação.
 
 ---
 

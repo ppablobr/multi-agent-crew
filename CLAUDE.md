@@ -17,6 +17,8 @@ Você é o **orquestrador** deste sistema multi-agente. Seu papel é entender a 
 | **Education Agent** | `education` | Materiais educacionais sobre IA, LLMs e automação |
 | **DevOps Agent** | `devops` | Organização de projetos, auditoria de estrutura, cleanup |
 | **Data Analytics Agent** | `data-analytics` | Análise de dados, ROI, dashboards e storytelling com dados |
+| **GitHub Ops Agent** | Agent tool (`github-ops`) | Git operations, commits, push, PRs, merge, fork, quality checks |
+| **GitHub Agent** | `github` | GitHub platform ops via `gh` CLI: PRs, issues, CI/CD, API queries |
 
 > **Nota**: A partir de 2026-03-12, os agentes foram refatorados para o padrão **YAML Skills**. O Claude Code invoca automaticamente as skills quando detecta a intenção do usuário. Apenas o Agent Manager ainda usa slash command (`/agent-manager`).
 
@@ -59,10 +61,15 @@ Analise a tarefa e mapeie para o agente mais adequado. Exemplos:
 - "Organiza os arquivos do projeto" → **DevOps Agent**
 - "Calcula o ROI dessa automação" → **Data Analytics Agent**
 - "Cria um dashboard de métricas" → **Data Analytics Agent**
+- "Faz commit e push das mudanças" → **GitHub Ops Agent**
+- "Cria um PR para a branch feature" → **GitHub Ops Agent** (push) + **GitHub Agent** (create PR)
+- "Verifica o status do CI no PR #55" → **GitHub Agent**
+- "Lista as issues abertas com label bug" → **GitHub Agent**
 
 ### Passo 2 — Invocar o agente
 Os agentes são implementados como **skills YAML** no Claude Code:
 - **Skills YAML** (designer, linkedin, n8n, ai-pm, process-manager, education, devops, data-analytics): O Claude Code invoca automaticamente quando detecta a intenção. As skills já carregam o contexto do AGENT.md e instruções de memória.
+- **Claude Code Agent** (github-ops): Invocado automaticamente via Agent tool quando detecta operações git/GitHub.
 - **Slash command** (/agent-manager): Invoque manualmente quando o usuário pedir para criar ou gerenciar agentes.
 
 ### Passo 3 — Executar com contexto
@@ -100,6 +107,13 @@ Quando uma tarefa requer múltiplos agentes, use o padrão de **handoff sequenci
 - **Process Manager + Data Analytics**: Process Manager mapeia processo → Data Analytics Agent analisa eficiência
 - **DevOps + Agent Manager**: DevOps Agent organiza estrutura → Agent Manager valida padrões de agentes
 - **Data Analytics + Designer**: Data Analytics Agent gera insights → Designer Agent cria visualizações
+- **GitHub Ops + DevOps**: DevOps Agent reorganiza estrutura → GitHub Ops Agent faz commit e push
+- **GitHub Ops + AI PM**: AI PM entrega milestone → GitHub Ops Agent cria PR e merge
+- **GitHub Ops + Tech Docs Writer**: Tech Docs Writer documenta → GitHub Ops Agent cria PR com docs
+- **GitHub Ops + n8n**: n8n Agent cria workflows → GitHub Ops Agent versiona os arquivos
+- **GitHub Ops + GitHub**: GitHub Ops faz commit/push → GitHub Agent cria PR e verifica CI
+- **GitHub + AI PM**: AI PM define milestone → GitHub Agent cria issues e tracked PRs
+- **GitHub + Tech Docs Writer**: Tech Docs Writer documenta → GitHub Agent cria PR com review
 
 ---
 

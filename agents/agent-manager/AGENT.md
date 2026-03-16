@@ -67,10 +67,18 @@ Solicite ao orquestrador usar a skill creator com:
 - Crie estrutura de diretórios e memória
 - Crie slash command em `.claude/commands/`
 
-### 4️⃣ Integração
-- Atualize `shared/memory/world.md` com novo agente
-- Documente colaborações com outros agentes
-- Teste handoffs básicos
+### 4️⃣ Integração (Checklist obrigatório)
+Cada ponto abaixo DEVE ser atualizado para que os outros agentes descubram e invoquem o novo agente:
+
+- [ ] `agents/<nome>/AGENT.md` — doc de referência do ecossistema (persona, especialidades, colaborações)
+- [ ] `agents/<nome>/memory/history.md` — log inicial de criação
+- [ ] `agents/agent-manager/memory/ecosystem-map.md` — linha na tabela de agentes + colaborações
+- [ ] `agents/agent-manager/memory/history.md` — log de criação do agente
+- [ ] `shared/memory/world.md` — linha na tabela de agentes ativos + ação registrada
+- [ ] `CLAUDE.md` — linha na tabela de agentes disponíveis + exemplos de roteamento + colaborações
+- [ ] Skill/Agent definition (`.claude/skills/<nome>/SKILL.md` ou `.claude/agents/<nome>.md`) — definição executável
+
+**Se qualquer item ficar faltando, os outros agentes NÃO saberão que o novo agente existe e não poderão invocá-lo.**
 
 ---
 
@@ -122,7 +130,9 @@ multi-agent-crew/
 ├── Education Agent       → Materiais educacionais sobre IA e automação
 ├── Data Analytics Agent  → Análise de dados, ROI, dashboards e insights
 ├── DevOps Agent          → Organização de arquivos e estrutura do projeto
-└── Tech Docs Writer      → PRDs, roadmaps, ADRs, SOPs, user stories
+├── Tech Docs Writer      → PRDs, roadmaps, ADRs, SOPs, user stories
+├── GitHub Ops Agent      → Git local: commit, push, add, status, merge, fork
+└── GitHub Agent          → GitHub platform: PRs, issues, CI/CD via gh CLI
 ```
 
 ### Gaps identificados (agentes que podem ser criados no futuro):
@@ -178,7 +188,7 @@ Ao criar novos agentes, siga estas diretrizes de teste:
 1. **USE SEMPRE A SKILL CREATOR** — todo novo agente DEVE ser criado usando a skill creator. NUNCA crie skills manualmente.
 2. **Sempre documente** cada novo agente antes de declarar que está pronto
 3. **Valide coerência** — novos agentes não devem ter responsabilidades que se sobrepõem demais
-4. **Atualize o mapa** do ecossistema em `shared/memory/world.md` ao criar/modificar agentes
+4. **Registre em TODOS os pontos** — siga o checklist completo do step 4 (ecosystem-map, world.md, CLAUDE.md, history). Se faltar um registro, o agente fica invisível para os outros
 5. **Crie o slash command** correspondente em `.claude/commands/` para cada novo agente
 6. **Inicialize a memória** — crie os arquivos de memória vazios para cada novo agente
 7. **Teste o handoff** — verifique que o novo agente sabe quando e como colaborar

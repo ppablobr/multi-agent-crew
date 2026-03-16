@@ -1,5 +1,5 @@
 # Mapa do Ecossistema de Agentes
-> Atualizado em: 2026-03-14
+> Atualizado em: 2026-03-16
 
 ## Agentes ativos
 
@@ -15,6 +15,8 @@
 | Designer Agent | agents/designer/ | designer skill | 🟢 Ativo |
 | Tech Docs Writer | agents/tech-docs-writer/ | tech-docs-writer skill | 🟢 Ativo |
 | DevOps Agent | agents/devops/ | devops skill | 🟢 Ativo |
+| GitHub Ops Agent | agents/github-ops/ | Claude Code Agent tool | 🟢 Ativo |
+| GitHub Agent | agents/github/ | github skill | 🟢 Ativo |
 
 ## Mapa de colaborações
 
@@ -41,6 +43,16 @@ Designer ←→ Data Analytics (visualizações bonitas)
 Designer ←→ DevOps (organizar design assets)
 Tech Docs Writer ←→ DevOps (atualizar docs após reorg)
 DevOps ←→ Agent Manager (estrutura de novos agentes)
+GitHub Ops ←→ DevOps (commit após reorganização de arquivos)
+GitHub Ops ←→ AI PM (commit de entregas de milestones)
+GitHub Ops ←→ Tech Docs Writer (PRs com documentação detalhada)
+GitHub Ops ←→ Agent Manager (versionamento de novos agentes)
+GitHub Ops ←→ n8n (versionamento de workflow files)
+GitHub Ops ←→ GitHub (git local + gh CLI = fluxo completo)
+GitHub ←→ AI PM (issues e PRs de milestones)
+GitHub ←→ DevOps (issues de estrutura do projeto)
+GitHub ←→ Tech Docs Writer (PRs com docs detalhadas)
+GitHub ←→ n8n (CI/CD de workflows)
 Agent Manager ←→ todos (criar/evoluir qualquer agente)
 ```
 
