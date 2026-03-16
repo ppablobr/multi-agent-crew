@@ -1,0 +1,23 @@
+{
+  "skill_name": "data-analytics",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Temos logs de um workflow n8n que automatizou cadastro de leads. 90 dias de dados. Calcula ROI comparando com processo manual anterior (5 min/lead manual, 30 seg/lead automatizado, custo R$50/hora).",
+      "expected_output": "ROI calculation with time saved, cost savings, ROI percentage, payback period, and visualization. Should update memory/history.md.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Cria dashboard de KPIs para projeto de IA: taxa de adoção (target 80%), tempo médio de resposta (target <3s), satisfação usuário (target 4.5/5). Dados em /data/ai-project-kpis.csv. Dashboard interativo em HTML.",
+      "expected_output": "Interactive HTML dashboard with Plotly showing current vs target for each KPI, with color-coding and trends. Should update memory/datasets.md.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Analisa dados de mentoria do Education Agent. Compara turma A (hands-on) vs turma B (só teoria). 40 participantes total. Dados: quiz scores, feedback. Responde: diferença é significativa?",
+      "expected_output": "Statistical comparison with descriptive stats, t-test results, visualization, and clear business-language interpretation of significance. Should update memory/insights.md.",
+      "files": []
+    }
+  ]
+}

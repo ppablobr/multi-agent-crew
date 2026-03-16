@@ -1,0 +1,21 @@
+# Secrets and credentials
+.mcp.json
+.env
+.env.local
+credentials/
+
+# Claude Code local settings
+.claude/settings.local.json
+.claude/commands/settings.local.json
+.claude/agent-memory/
+
+# Obsidian personal config
+.obsidian/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Personal data
+data/
+data-analytics-workspace/
